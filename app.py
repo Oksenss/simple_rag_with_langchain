@@ -3,7 +3,7 @@ print(find_dotenv())
 
 load_dotenv('.env')
 
-
+import os
 import bs4
 from langchain import hub
 from langchain_chroma import Chroma
@@ -43,9 +43,17 @@ app = Flask(__name__)
 def query():
     data = request.get_json(force=True)  # Get data from POST request
     question = data['question']  # Get the question from the data
-    response = rag_chain.invoke(question)  # Use your function to get the response
-    return jsonify(response)  # Return the response as JSON
+    confirmation = data.get('confirmation')  # Get the confirmation from the data
 
+    # Get the confirmation value from the environment variables
+    expected_confirmation = os.getenv('CONFIRMATION')
+
+    # Check if the confirmation variable matches your expected value
+    if confirmation == expected_confirmation:
+        response = rag_chain.invoke(question)  # Use your function to get the response
+        return jsonify(response)  # Return the response as JSON
+    else:
+        return jsonify({"error": "Invalid confirmation value."}), 403
 @app.route('/')
 def hello():
     return 'hello world'
