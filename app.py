@@ -46,5 +46,9 @@ def query():
     response = rag_chain.invoke(question)  # Use your function to get the response
     return jsonify(response)  # Return the response as JSON
 
+@app.route('/')
+def hello():
+    return 'hello world'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
