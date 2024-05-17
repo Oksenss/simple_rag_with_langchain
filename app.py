@@ -16,7 +16,7 @@ from langchain_openai import ChatOpenAI
 from flask import Flask, request, jsonify
 llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
 # llm = ChatOpenAI(model="gpt-4-turbo-preview")
-loader = PyMuPDFLoader("fifty.pdf")
+loader = PyMuPDFLoader("books.pdf")
 data = loader.load()
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
@@ -60,3 +60,4 @@ def hello():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
