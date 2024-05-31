@@ -14,8 +14,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_openai import ChatOpenAI
 from flask import Flask, request, jsonify
-llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
-# llm = ChatOpenAI(model="gpt-4-turbo-preview")
+# llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
+llm = ChatOpenAI(model="gpt-4-turbo-preview")
 loader = PyMuPDFLoader("books_v2.pdf")
 data = loader.load()
 
